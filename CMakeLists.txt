@@ -13,4 +13,20 @@ foreach(COMPONENT ${ROS2_REQUIRED_COMPONENTS})
     find_package(${COMPONENT} REQUIRED)
 endforeach()
 
+
+add_executable(
+    subscriber
+    ${CMAKE_CURRENT_LIST_DIR}/src/subscriber.cpp
+)
+ament_target_dependencies(
+    subscriber
+    ${ROS2_REQUIRED_COMPONENTS}
+)
+
+
+install(
+    TARGETS subscriber
+    DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()
