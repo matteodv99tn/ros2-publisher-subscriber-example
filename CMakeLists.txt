@@ -7,7 +7,6 @@ find_package(ament_cmake REQUIRED)
 
 set(ROS2_REQUIRED_COMPONENTS
     rclcpp
-    std_msgs
 )
 foreach(COMPONENT ${ROS2_REQUIRED_COMPONENTS})
     find_package(${COMPONENT} REQUIRED)
