@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  workspace-build:
+  humble-build-tests:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout the code
@@ -20,6 +20,27 @@ jobs:
         uses: ichiro-its/ros2-ws-action/setup@v1.0.0
         with:
           distro: humble
+      
+      - name: Build the workspace
+        uses: ichiro-its/ros2-ws-action/build@v1.0.0
+
+      - name: Test the workspace
+        run: |
+          source install/setup.bash
+          colcon test --return-code-on-test-failure
+
+  jazzy-build-tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+        with:
+          path: workspace
+      
+      - name: Setup ROS2 workspace
+        uses: ichiro-its/ros2-ws-action/setup@v1.0.0
+        with:
+          distro: jazzy
       
       - name: Build the workspace
         uses: ichiro-its/ros2-ws-action/build@v1.0.0
