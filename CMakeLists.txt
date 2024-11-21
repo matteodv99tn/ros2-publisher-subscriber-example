@@ -7,6 +7,7 @@ find_package(ament_cmake REQUIRED)
 
 set(ROS2_REQUIRED_COMPONENTS
     rclcpp
+    std_msgs
 )
 foreach(COMPONENT ${ROS2_REQUIRED_COMPONENTS})
     find_package(${COMPONENT} REQUIRED)
@@ -35,5 +36,13 @@ install(
     TARGETS subscriber publisher
     DESTINATION lib/${PROJECT_NAME}
 )
+
+if(BUILD_TESTING)
+    find_package(ament_cmake_gtest REQUIRED)
+    ament_add_gtest(
+        unit_testing
+        src/unit_tests.cpp
+    )
+endif()
 
 ament_package()

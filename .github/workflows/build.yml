@@ -23,3 +23,8 @@ jobs:
       
       - name: Build the workspace
         uses: ichiro-its/ros2-ws-action/build@v1.0.0
+
+      - name: Test the workspace
+        run: |
+          source install/setup.bash
+          colcon test --return-code-on-test-failure
